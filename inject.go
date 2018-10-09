@@ -9,7 +9,12 @@ import (
 	"github.com/google/go-cloud/wire"
 )
 
-func initFoo(ctx context.Context) (Foo, error) {
+func initBar(ctx context.Context) (Bar, error) {
 	wire.Build(SuperSet)
-	return Foo{}, nil
+	return Bar{}, nil
+}
+
+func initFooBar(ctx context.Context) (FooBar, error) {
+	wire.Build(SuperSet)
+	return FooBar{}, nil
 }

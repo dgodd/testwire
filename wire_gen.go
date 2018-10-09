@@ -11,7 +11,8 @@ import (
 
 // Injectors from inject.go:
 
-func initFoo(ctx context.Context) (Foo, error) {
+func initBar(ctx context.Context) (Bar, error) {
 	foo := ProvideFoo()
-	return foo, nil
+	bar := ProvideBar(foo)
+	return bar, nil
 }

@@ -11,17 +11,33 @@ type Foo struct {
 	X int
 }
 
+type Bar struct {
+	X int
+}
+
+type FooBar struct {
+	X int
+}
+
 func ProvideFoo() Foo {
 	return Foo{X: 42}
 }
 
-var SuperSet = wire.NewSet(ProvideFoo)
+func ProvideBar(foo Foo) Bar {
+	return Bar{X: foo.X + 12}
+}
+
+func ProvideFooBar(foo Foo, bar Bar) FooBar {
+	return FooBar{X: foo.X + bar.X}
+}
+
+var SuperSet = wire.NewSet(ProvideFoo, ProvideBar, ProvideFooBar)
 
 func main() {
-	foo, err := initFoo(context.TODO())
+	bar, err := initBar(context.TODO())
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("FOO:", foo)
+	fmt.Println("BAR:", bar)
 }
